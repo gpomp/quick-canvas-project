@@ -8,7 +8,14 @@ function saveCanvas() {
     console.log("begin canvas...");
     const canvas = createCanvas(1, 1);
     const ctx = canvas.getContext('2d');
-    canvasFunction(canvas, ctx);
+    const opts = {};
+    if (process.argv.length > 4) {
+        for (let i = 4; i < process.argv.length; i++) {
+            const arg = process.argv[i].split('=');
+            opts[arg[0]] = arg[1];
+        }
+    }
+    canvasFunction(canvas, ctx, opts);
     console.log("draw canvas...");
 
     const buf = canvas.toBuffer();
